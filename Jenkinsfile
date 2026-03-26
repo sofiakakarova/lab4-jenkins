@@ -18,17 +18,11 @@ pipeline {
     post {
         always {
             echo 'Generating report...'
-            sh 'echo "<h1>Test Report</h1><p>Pipeline finished successfully.</p>" > report.html'
 
-            publishHTML([
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'report.html',
-                reportName: 'Test Report'
-            ])
+            // HTML файл
+            sh 'echo "<h1>Test Report</h1>" > report.html'
 
+            // PDF
             sh 'wkhtmltopdf report.html report.pdf'
         }
     }
